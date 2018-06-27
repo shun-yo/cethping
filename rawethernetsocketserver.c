@@ -27,13 +27,13 @@ struct RawSocket* new_RawSocket(char *interface){
     rawsocket->shutdown_request = shutdown_request;
     rawsocket->close_request = close_request;
 
-	memset(rawsocket->interface,0x0,sizeof(rawsocket->interface));
-	strcpy(rawsocket->interface, interface);
+    memset(rawsocket->interface,0x0,sizeof(rawsocket->interface));
+    strcpy(rawsocket->interface, interface);
 	
 	return rawsocket;
 }
 
-//http://kirihari.net/program/L2Forwarder.html
+
 void server_bind(struct RawSocket* pthis){
 	struct sockaddr_ll sockaddr;
 	memset(&sockaddr, 0x0, sizeof(sockaddr));
