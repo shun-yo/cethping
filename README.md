@@ -1,7 +1,11 @@
 # cethping
-## Requirements
 
-- Linux
+Raw socketで通信。[ethping](https://github.com/y-sira/pyng)を参考。
+
+
+## 環境
+
+- Ubuntu14.04
 
 ## Usage
 
