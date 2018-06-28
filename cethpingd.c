@@ -5,10 +5,10 @@
 #include"ethernet.h"
 
 void start_daemon(char *interface){
-	struct RawSocket* rawsocket = new_RawSocket(interface);
-	int len;
+    struct RawSocket* rawsocket = new_RawSocket(interface);
+    int len;
     rawsocket->server_bind(rawsocket);
-	while(1){
+    while(1){
         int len = rawsocket->get_request(rawsocket);
         struct cethhdr *data = (struct cethhdr*)(rawsocket->buf);
         fflush(stdout);
@@ -23,15 +23,15 @@ void start_daemon(char *interface){
             printf("%02x", (uint16_t)data->h_proto);
             printf("\n");
         }
-	}
+    }
 }
 
 int main(int argc, char *argv[]){
-	if(argc != 2){
-		printf("usage: %s <interface>", argv[0]);
-		exit(0);
-	}
-	char *if_name = argv[1];
-	start_daemon(if_name);
-	return 0;
+    if(argc != 2){
+        printf("usage: %s <interface>", argv[0]);
+        exit(0);
+    }
+    char *if_name = argv[1];
+    start_daemon(if_name);
+    return 0;
 }

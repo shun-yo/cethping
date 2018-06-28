@@ -21,5 +21,5 @@ cethpingd: cethpingd.o rawethernetsocketserver.o ethernet.o
 	gcc -o cethpingd cethpingd.o rawethernetsocketserver.o ethernet.o
 
 clean:
-		rm *.o cethping cethpingd
+	rm *.o cethping cethpingd
 

@@ -12,12 +12,12 @@
 
 
 struct RawSocket* new_RawSocket(char *interface){
-	struct RawSocket* rawsocket = (struct RawSocket*)malloc(sizeof(struct RawSocket));
+    struct RawSocket* rawsocket = (struct RawSocket*)malloc(sizeof(struct RawSocket));
 
-	if((rawsocket->socket = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL))) < 0){
-		perror("socket");
-		exit(0);
-	};
+    if((rawsocket->socket = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL))) < 0){
+        perror("socket");
+        exit(0);
+    };
 
     rawsocket->server_bind = server_bind;
     rawsocket->server_activate = server_activate;
@@ -29,65 +29,65 @@ struct RawSocket* new_RawSocket(char *interface){
 
     memset(rawsocket->interface,0x0,sizeof(rawsocket->interface));
     strcpy(rawsocket->interface, interface);
-	
-	return rawsocket;
+
+    return rawsocket;
 }
 
 
 void server_bind(struct RawSocket* pthis){
-	struct sockaddr_ll sockaddr;
-	memset(&sockaddr, 0x0, sizeof(sockaddr));
-	sockaddr.sll_family = AF_PACKET;
-	sockaddr.sll_protocol = htons(ETH_P_ALL);
-	sockaddr.sll_ifindex = if_nametoindex(pthis->interface);
-	if(bind(pthis->socket, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0) {
-		perror("bind");
-		exit(0);
-	}
+    struct sockaddr_ll sockaddr;
+    memset(&sockaddr, 0x0, sizeof(sockaddr));
+    sockaddr.sll_family = AF_PACKET;
+    sockaddr.sll_protocol = htons(ETH_P_ALL);
+    sockaddr.sll_ifindex = if_nametoindex(pthis->interface);
+    if(bind(pthis->socket, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0) {
+        perror("bind");
+        exit(0);
+    }
 }
 
 void server_activate(struct RawSocket* pthis){
-	return;
+    return;
 };
 
 void server_close(struct RawSocket* pthis){
-	close(pthis->socket);
+    close(pthis->socket);
 };
 
 
 int server_fileno(struct RawSocket* pthis){
-	return pthis->socket;
+    return pthis->socket;
 };
 
 
 int get_request(struct RawSocket* pthis){
 
-//	struct sockaddr_ll senderinfo;
-//	socklen_t addrlen;
-//	addrlen=sizeof(senderinfo);
+//  struct sockaddr_ll senderinfo;
+//  socklen_t addrlen;
+//  addrlen=sizeof(senderinfo);
 
-	int recv_size;
+    int recv_size;
 
-	memset(pthis->buf,0x0,sizeof(pthis->buf));
-    
-	//recv_size = recvfrom(pthis->socket, pthis->buf, sizeof(pthis->buf), 0,(struct sockaddr *)&senderinfo, &addrlen);
-	recv_size = recv(pthis->socket, pthis->buf, sizeof(pthis->buf),0);
+    memset(pthis->buf,0x0,sizeof(pthis->buf));
+
+    //recv_size = recvfrom(pthis->socket, pthis->buf, sizeof(pthis->buf), 0,(struct sockaddr *)&senderinfo, &addrlen);
+    recv_size = recv(pthis->socket, pthis->buf, sizeof(pthis->buf),0);
 
     if(recv_size < 0){
         perror("recv error");
     }
-	return recv_size;
+    return recv_size;
 };
 
 
 
 void shutdown_request(struct RawSocket* pthis, int rawsock_request){
-	pthis->close_request(pthis, rawsock_request);
+    pthis->close_request(pthis, rawsock_request);
 };
 
 
 void close_request(struct RawSocket* pthis, int rawsock_request){
-	return;
+    return;
 };
 
 
