@@ -20,3 +20,7 @@ sudo cethpingd $INTERFACE_NAME
 ```bash
 sudo cethping $DESTINATION_MAC_ADDRESS $SOURCE_INTERFACE_NAME
 ```
+
+###screen shot
+![screen shot](images/image1.png)
+

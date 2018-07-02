@@ -8,11 +8,11 @@ struct BaseReqestHandler;
 
 struct RawSocket{
     int socket;
-    char buf[BUFSIZE];
-    char interface[16];
-    void (*bind_rawsocket)(struct RawSocket* pthis);
-    int (*recv_rawsocket)(struct RawSocket* pthis);
-    void (*close_rawsocket)(struct RawSocket* pthis);
+    char buf[BUFSIZE]; //パケット用のバッファ(最大は8192バイト)
+    char interface[16]; //インターフェースの名前(文字列),インデックス番号を引くのに使う
+    void (*bind_rawsocket)(struct RawSocket* pthis); //中でbindを行う
+    int (*recv_rawsocket)(struct RawSocket* pthis); //中でrecvする
+    void (*close_rawsocket)(struct RawSocket* pthis); //中でソケットをcloseする
 };
 
 

@@ -5,13 +5,16 @@
 #include"ethernet.h"
 
 void start_daemon(char *interface){
+    //rawソケット作成(receiverのインターフェース名を指定)
     struct RawSocket* rawsocket = new_RawSocket(interface);
     int len;
+    //bindでインターフェースと紐付け
     rawsocket->bind_rawsocket(rawsocket);
     while(1){
         int len = rawsocket->recv_rawsocket(rawsocket);
         struct ethhdr_frame *data = (struct ethhdr_frame*)(rawsocket->buf);
         fflush(stdout);
+        //受信したパケットの内容を表示
         if(len > 0){
             printf("src: ");
             print_macaddr(data->h_source);

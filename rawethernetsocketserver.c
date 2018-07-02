@@ -35,6 +35,7 @@ void bind_RawSocket(struct RawSocket* pthis){
     memset(&sockaddr, 0x0, sizeof(sockaddr));
     sockaddr.sll_family = AF_PACKET;
     sockaddr.sll_protocol = htons(ETH_P_ALL);
+    //if_nametoindexでinterface名から番号を取得。sll_ifindexに指定
     sockaddr.sll_ifindex = if_nametoindex(pthis->interface);
     if(bind(pthis->socket, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0) {
         perror("bind");
@@ -45,6 +46,7 @@ void bind_RawSocket(struct RawSocket* pthis){
 
 int recv_RawSocket(struct RawSocket* pthis){
     int recv_size;
+    //バッファをクリアしてからrecvで受信
     memset(pthis->buf,0x0,sizeof(pthis->buf));
     recv_size = recv(pthis->socket, pthis->buf, sizeof(pthis->buf),0);
     if(recv_size < 0){

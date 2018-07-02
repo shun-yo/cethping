@@ -19,7 +19,7 @@ void ethping(char *destination, char* interface){
 
     //パケットのデータ用のバッファ
     unsigned char buf[32];
-    //イーサネットフレームのフォーマットに合わせてキャスト
+    //パケットを定義。イーサネットフレームのフォーマットに合わせてキャスト
     struct ethhdr_frame* eth_packet = (struct ethhdr_frame*)buf;
     //sender, receiverのMACアドレスを格納。Protocol typeは任意で0x88b5を指定
     //senderのMACアドレスは指定したインターフェース名を基に取得
