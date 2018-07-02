@@ -1,7 +1,7 @@
 all: cethping cethpingd
 
-rawethernetsocketserver.o: rawethernetsocketserver.c
-	gcc -c rawethernetsocketserver.c
+RawEthernetSocket.o: RawEthernetSocket.c
+	gcc -c RawEthernetSocket.c
 
 ethernet.o: ethernet.c
 	gcc -c ethernet.c
@@ -14,11 +14,11 @@ cethping.o: cethping.c
 	gcc -c cethping.c
 
 
-cethping: cethping.o rawethernetsocketserver.o ethernet.o
-	gcc -o cethping cethping.o rawethernetsocketserver.o ethernet.o
+cethping: cethping.o RawEthernetSocket.o ethernet.o
+	gcc -o cethping cethping.o RawEthernetSocket.o ethernet.o
 
-cethpingd: cethpingd.o rawethernetsocketserver.o ethernet.o
-	gcc -o cethpingd cethpingd.o rawethernetsocketserver.o ethernet.o
+cethpingd: cethpingd.o RawEthernetSocket.o ethernet.o
+	gcc -o cethpingd cethpingd.o RawEthernetSocket.o ethernet.o
 
 clean:
 	rm *.o cethping cethpingd

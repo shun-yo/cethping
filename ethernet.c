@@ -32,6 +32,8 @@ void set_macaddr_from_ifname(char *interface, char *raw){
     int fd;
     struct ifreq ifr;
     fd = socket(AF_INET, SOCK_DGRAM, 0);
+
+    //インターフェース名からMACアドレスを取得
     ifr.ifr_addr.sa_family = AF_INET;
     strncpy(ifr.ifr_name, interface, IFNAMSIZ-1);
     ioctl(fd, SIOCGIFHWADDR, &ifr);

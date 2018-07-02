@@ -10,6 +10,7 @@
 #include<netpacket/packet.h>
 #include<sys/ioctl.h>
 
+//パケットのフォーマット
 struct ethhdr_frame {
     unsigned char	h_dest[6];	/* destination eth addr	*/
     unsigned char	h_source[6];	/* source ether addr	*/
@@ -17,8 +18,11 @@ struct ethhdr_frame {
     char payload[];
 };
 
+//MACアドレスの文字列から生データに変換
 void set_macaddr_from_string(char *str, char *raw);
 
+//インターフェース名からMACアドレス取得
 void set_macaddr_from_ifname(char *interface, char *raw);
 
+//MACアドレスの生データを文字列でprintf
 void print_macaddr(char *raw);

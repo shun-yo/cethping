@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<linux/if_ether.h>
-#include"rawethernetsocketserver.h"
+#include"RawEthernetSocket.h"
 #include"ethernet.h"
 
 void start_daemon(char *interface){

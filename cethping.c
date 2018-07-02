@@ -10,7 +10,7 @@
 #include<netpacket/packet.h>
 #include<sys/ioctl.h>
 
-#include"rawethernetsocketserver.h"
+#include"RawEthernetSocket.h"
 #include"ethernet.h"
 
 void ethping(char *destination, char* interface){

@@ -8,7 +8,7 @@
 #include<net/ethernet.h>
 #include<net/if.h>
 #include<netpacket/packet.h>
-#include"rawethernetsocketserver.h"
+#include"RawEthernetSocket.h"
 
 struct RawSocket* new_RawSocket(char *interface){
     struct RawSocket* rawsocket = (struct RawSocket*)malloc(sizeof(struct RawSocket));
