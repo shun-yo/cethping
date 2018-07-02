@@ -8,7 +8,8 @@ Environment
 
 - Ubuntu14.04
 
-## Usage
+Usage
+-------
 
 ### Server
 
