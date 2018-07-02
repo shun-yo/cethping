@@ -21,6 +21,7 @@ sudo cethpingd $INTERFACE_NAME
 sudo cethping $DESTINATION_MAC_ADDRESS $SOURCE_INTERFACE_NAME
 ```
 
-###screen shot
+
+##Screen shot
 ![screen shot](images/image1.png)
 
