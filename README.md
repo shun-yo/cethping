@@ -10,6 +10,10 @@ Environment
 
 Usage
 -------
+### Compile
+```bash
+make
+```
 
 ### Server
 
