@@ -8,22 +8,27 @@ Environment
 
 - Ubuntu14.04
 
-Usage
+
+Compile
 -------
-### Compile
+makeでコンパイル
 ```bash
 make
 ```
 
-### Server
 
+Usage
+-------
+
+### Server
+receiver側のインターフェース名を指定
 
 ```bash
 sudo cethpingd $INTERFACE_NAME
 ```
 
 ### Client
-
+接続先のMACアドレスとsender側のインターフェースを指定
 ```bash
 sudo cethping $DESTINATION_MAC_ADDRESS $SOURCE_INTERFACE_NAME
 ```
