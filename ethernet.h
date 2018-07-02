@@ -10,16 +10,15 @@
 #include<netpacket/packet.h>
 #include<sys/ioctl.h>
 
-struct cethhdr {
+struct ethhdr_frame {
     unsigned char	h_dest[6];	/* destination eth addr	*/
     unsigned char	h_source[6];	/* source ether addr	*/
-    uint16_t h_proto;
-    //__be16		h_proto;		/* packet type ID field	*/
-    char rest[];
+    __be16		h_proto;		/* packet type ID field	*/
+    char payload[];
 };
 
-void mac_raw(char *str, char *raw);
+void set_macaddr_from_string(char *str, char *raw);
 
-void get_hw_addr(char *interface, char *raw);
+void set_macaddr_from_ifname(char *interface, char *raw);
 
-void print_mac_address(char *raw);
+void print_macaddr(char *raw);

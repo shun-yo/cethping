@@ -7,20 +7,23 @@
 void start_daemon(char *interface){
     struct RawSocket* rawsocket = new_RawSocket(interface);
     int len;
-    rawsocket->server_bind(rawsocket);
+    rawsocket->bind_rawsocket(rawsocket);
     while(1){
-        int len = rawsocket->get_request(rawsocket);
-        struct cethhdr *data = (struct cethhdr*)(rawsocket->buf);
+        int len = rawsocket->recv_rawsocket(rawsocket);
+        struct ethhdr_frame *data = (struct ethhdr_frame*)(rawsocket->buf);
         fflush(stdout);
         if(len > 0){
             printf("src: ");
-            print_mac_address(data->h_source);
+            print_macaddr(data->h_source);
             printf(", ");
             printf("dst: ");
-            print_mac_address(data->h_dest);
+            print_macaddr(data->h_dest);
             printf(", ");
             printf("type: ");
             printf("%02x", (uint16_t)data->h_proto);
+            printf(", ");
+            printf("payload: ");
+            printf("%s", data->payload);
             printf("\n");
         }
     }

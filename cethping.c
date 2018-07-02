@@ -14,26 +14,23 @@
 #include"ethernet.h"
 
 void ethping(char *destination, char* interface){
-
     struct RawSocket* rawsocket = new_RawSocket(interface);
-
     unsigned char buf[32];
+    struct ethhdr_frame* eth_packet = (struct ethhdr_frame*)buf;
+    memset(buf, 0x0, sizeof(eth_packet));
+    set_macaddr_from_string(destination, eth_packet->h_dest);
+    set_macaddr_from_ifname(interface, eth_packet->h_source);
+    eth_packet->h_proto = 0x88b5;
+    char* data = "Hi";
+    memcpy(eth_packet->payload, data, sizeof(data)); 
 
-    memset(buf, 0x0, sizeof(buf));
-
-    mac_raw(destination, ((struct cethhdr*)buf)->h_dest);
-
-    get_hw_addr(interface, ((struct cethhdr*)buf)->h_source);
-
-    ((struct cethhdr*)buf)->h_proto = 0xb588;
-
-    rawsocket->server_bind(rawsocket);
-
+    rawsocket->bind_rawsocket(rawsocket);
     int send_size = send(rawsocket->socket, &buf, sizeof(buf), 0);
+    printf("%dbyte send.\n", send_size);
 
-    printf("%d send\n", send_size);
+
+    rawsocket->close_rawsocket(rawsocket);
 }
-
 
 
 int main(int argc, char *argv[]){
